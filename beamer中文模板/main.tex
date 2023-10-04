@@ -1,0 +1,266 @@
+% 本文档为beamer中文模板，改编自overleaf的beamer示例。
+% 请在overleaf中以XeLaTeX编译。
+\PassOptionsToPackage{quiet}{fontspec}
+\documentclass{beamer}
+
+% 中文支持
+\usepackage[fontset=none]{ctex}
+\usepackage{fontspec}
+\setCJKmainfont{FandolHei-Regular}
+\setCJKsansfont{FandolHei-Regular}
+
+% 图片支持，图片全部存放在images文件夹下
+\usepackage{graphicx}
+\graphicspath{ {./img/} }
+% 表格支持
+\usepackage{booktabs}
+% 画图支持
+\usepackage{pgfplots}
+\usepgfplotslibrary{dateplot}
+
+% 主题与配色
+% 常用主题：default、metropolis
+\usetheme[block=fill]{metropolis}
+\usecolortheme{default}
+% 带页底信息
+%\useoutertheme{infolines}
+% 去除blocks阴影，添加[rounded]可以改为圆角
+\setbeamertemplate{blocks}[shadow=false]
+% 在无序列表的元素与目录页章节标题前加上圆点
+\setbeamertemplate{items}[circle]
+\setbeamertemplate{sections/subsections in toc}[circle]
+
+%------------------------------------------------------------
+% 封面页内容
+
+\title[beamer中文模板]{这里是主标题}
+\subtitle{这里是副标题}
+\author{演讲者姓名}
+\institute{机构名称}
+\date{2023/4/23}
+% 在每一页右下角显示的logo图标，需要将logo图片放置在源文件夹
+%\logo{\includegraphics[height=1cm]{overleaf-logo}}
+
+%------------------------------------------------------------
+% 使用本段代码后每个章节页都会显示整个目录，突出显示本章节标题
+
+% \AtBeginSection[]
+% {
+%   \begin{frame}
+%     \frametitle{目录}
+%     \tableofcontents[currentsection]
+%   \end{frame}
+% }
+%------------------------------------------------------------
+
+
+% 文档开始
+\begin{document}
+
+%------------------------------------------------------------
+% 创建封面页
+\frame{\titlepage}
+
+%------------------------------------------------------------
+% 创建目录页
+\begin{frame}
+\frametitle{目录}
+\tableofcontents
+\end{frame}
+
+%------------------------------------------------------------
+% 第一部分
+\section{第一部分}
+
+%------------------------------------------------------------
+% 无序列表
+\begin{frame}
+\frametitle{列表}
+
+\begin{columns}[T,onlytextwidth]
+    \column{0.5\textwidth}
+    无序列表
+    \begin{itemize}
+    \item 元素A 
+    \item 元素B
+    \item 元素C
+    \end{itemize}
+
+    \column{0.5\textwidth}
+    有序列表
+    \begin{enumerate}
+    \item 元素1
+    \item 元素2
+    \item 元素3
+    \end{enumerate}
+\end{columns}
+
+\hspace*{\fill}\\
+说明列表
+\begin{description}
+\item[元素1] 元素1的说明
+\item[元素2] 元素2的说明
+\item[元素3] 元素3的说明
+\end{description}
+
+\end{frame}
+
+%------------------------------------------------------------
+% 插入图片
+\begin{frame}
+\frametitle{插入图片}
+这一页演示了如何插入图片，请注意图片需要存放在img文件夹下。\\
+\includegraphics{overleaf-logo}
+\centering
+\end{frame}
+
+%------------------------------------------------------------
+% 引用图片
+\begin{frame}
+\frametitle{引用图片}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth]{overleaf-logo}
+    \caption{有关图片的描述}
+    \label{图1}
+\end{figure}
+As you can see in the figure \ref{图1}, the function grows near 0. Also, in the page \pageref{图1} is the same example.
+\end{frame}
+
+%------------------------------------------------------------
+% 插入表格，需要导入宏包booktabs
+\begin{frame}
+\frametitle{Tables}
+\begin{table}
+    \caption{Largest cities in the world (source: Wikipedia)}
+    \begin{tabular}{@{} lr @{}}
+        \toprule
+        City & Population\\
+        \midrule
+        Mexico City & 20,116,842\\
+        Shanghai & 19,210,000\\
+        Peking & 15,796,450\\
+        Istanbul & 14,160,467\\
+        \bottomrule
+    \end{tabular}
+\end{table}
+\end{frame}
+
+%------------------------------------------------------------
+% 插入曲线图
+\begin{frame}
+\frametitle{插入曲线图}
+  \begin{figure}
+    \begin{tikzpicture}
+      \begin{axis}[
+        mlineplot,
+        width=0.9\textwidth,
+        height=6cm,
+        legend pos=outer north east,
+      ]
+        \addplot {sin(deg(x))};
+        \addplot+[samples=100] {sin(deg(2*x))};
+
+        \legend{Amos, Bell}
+        
+      \end{axis}
+    \end{tikzpicture}
+  \end{figure}
+\end{frame}
+
+%------------------------------------------------------------
+% 插入柱状图
+\begin{frame}
+\frametitle{插入柱状图}
+  \begin{figure}
+    \begin{tikzpicture}
+      \begin{axis}[
+        mbarplot,
+        xlabel={横轴},
+        ylabel={纵轴},
+        xtick={0,1,2,3,4},
+        enlargelimits=0.2,
+        width=0.9\textwidth,
+        height=6cm,
+      ]
+      \addplot plot coordinates {(1, 20) (2, 25) (3, 22.4) (4, 12.4)};
+      \addplot plot coordinates {(1, 18) (2, 24) (3, 23.5) (4, 13.2)};
+      \addplot plot coordinates {(1, 10) (2, 19) (3, 25) (4, 15.2)};
+
+      \legend{Amos, Bell, Coke}
+
+      \end{axis}
+    \end{tikzpicture}
+  \end{figure}
+\end{frame}
+
+%------------------------------------------------------------
+% 第二部分
+\section{第二部分}
+
+%------------------------------------------------------------
+% block
+\begin{frame}
+\frametitle{block}
+有三种预设的\alert{block}，且可通过[block=fill]来显示背景。
+\begin{block}{Default}
+    Block content.
+\end{block}
+\begin{alertblock}{Alert}
+    Block content.
+\end{alertblock}
+\begin{exampleblock}{Example}
+    Block content.
+\end{exampleblock}
+\end{frame}
+
+%------------------------------------------------------------
+% 分列显示
+\begin{frame}
+\frametitle{分列显示}
+
+\begin{columns}
+
+\column{0.5\textwidth}
+这是第一列的文本。\\
+一大段文字一大段文字一大段文字一大段文字一大段文字一大段文字一大段文字\\
+$$E=mc^2$$
+\begin{itemize}
+\item 第一句话
+\item 第二句话
+\end{itemize}
+
+\vspace*{\fill} % 插入空白列分割左右两列
+
+\column{0.5\textwidth}
+这是第二列的文本。\\
+\hspace*{\fill}\\ % 插入空白行分割图片与文本
+\includegraphics{overleaf-logo}
+
+\end{columns}
+\end{frame}
+
+%------------------------------------------------------------
+% 第三部分
+\section{第三部分}
+
+%------------------------------------------------------------
+% 第四部分
+\section{第四部分}
+
+%------------------------------------------------------------
+% 第五部分
+\section{第五部分}
+
+%------------------------------------------------------------
+% 结束页
+\begin{frame}
+\frametitle{结尾}
+\huge{\textbf{感谢聆听}}
+\centering
+\end{frame}
+
+%------------------------------------------------------------
+
+% 文档结束
+\end{document}
